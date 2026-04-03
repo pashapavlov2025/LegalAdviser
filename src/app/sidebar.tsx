@@ -9,7 +9,9 @@ export function Sidebar() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "/", label: "Проблемы из 1С", icon: "☰" },
+    { href: "/", label: "Дашборд", icon: "◈" },
+    { href: "/problems", label: "Проблемы", icon: "☰" },
+    { href: "/new", label: "Новая проблема", icon: "＋" },
     { href: "/settings", label: "Настройки 1С", icon: "⚙" },
   ];
 
@@ -19,7 +21,7 @@ export function Sidebar() {
         {links.map((link) => {
           const active =
             link.href === "/"
-              ? pathname === "/" || pathname.startsWith("/problem")
+              ? pathname === "/"
               : pathname.startsWith(link.href);
           return (
             <Link

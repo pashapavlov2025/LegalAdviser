@@ -104,3 +104,22 @@ export function updateProblemStatus(id: string, status: ProblemStatus): boolean 
   }
   return false;
 }
+
+export function addProblem(problem: Problem): void {
+  problems.push(problem);
+}
+
+export function getCounterparties(): Counterparty[] {
+  return counterparties.map((c) => ({ ...c }));
+}
+
+export function addCounterparty(cp: Counterparty): void {
+  counterparties.push(cp);
+}
+
+export function nextProblemId(): string {
+  const year = new Date().getFullYear();
+  const existing = problems.filter((p) => p.id.startsWith(`PRB-${year}`));
+  const num = existing.length + 1;
+  return `PRB-${year}-${num.toString().padStart(3, "0")}`;
+}
