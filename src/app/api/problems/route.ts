@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchProblems, addProblem, nextProblemId, getCounterparties, addCounterparty } from "@/lib/mock-1c";
+import { addTimelineEvent } from "@/lib/claims-store";
 import { ProblemStatus } from "@/lib/models";
 
 export async function GET() {
@@ -30,5 +31,13 @@ export async function POST(req: NextRequest) {
   };
 
   addProblem(problem);
+
+  addTimelineEvent(problem.id, {
+    problemId: problem.id,
+    type: "created",
+    description: `Проблема создана: ${description.slice(0, 80)}${description.length > 80 ? "..." : ""}`,
+    newStatus: ProblemStatus.NEW,
+  });
+
   return NextResponse.json(problem, { status: 201 });
 }

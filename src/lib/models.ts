@@ -58,3 +58,13 @@ export interface Claim {
   recipient: string;
   sent: boolean;
 }
+
+export interface TimelineEvent {
+  id: string;
+  problemId: string;
+  timestamp: string;
+  type: "created" | "status_changed" | "claim_generated" | "claim_edited" | "claim_sent" | "comment";
+  description: string;
+  oldStatus?: ProblemStatus;
+  newStatus?: ProblemStatus;
+}
