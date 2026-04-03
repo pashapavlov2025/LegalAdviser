@@ -3,12 +3,12 @@
 export default function SettingsPage() {
   return (
     <>
-      <h2 className="text-2xl font-bold">Настройки подключения к 1С</h2>
-      <p className="text-sm text-gray-500 mb-6">
+      <h2 className="text-xl md:text-2xl font-bold">Настройки подключения к 1С</h2>
+      <p className="text-sm text-gray-500 mb-4 md:mb-6">
         Параметры подключения к 1С:Предприятие через REST/OData API
       </p>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-5">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 mb-4 md:mb-5">
         <h3 className="text-base font-semibold pb-3 mb-4 border-b border-gray-200">
           Подключение к 1С:Предприятие
         </h3>
@@ -18,23 +18,23 @@ export default function SettingsPage() {
           <Field label="Пароль" defaultValue="demo1234" type="password" />
           <Field label="Информационная база" defaultValue="LegalBase" />
         </div>
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => alert("В прототипе используются демо-данные. В production-версии здесь будет реальное подключение к 1С.")}
-            className="px-5 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
+            className="px-5 py-2.5 md:py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
           >
             Проверить подключение
           </button>
           <button
             onClick={() => alert("Настройки сохранены (демо)")}
-            className="px-5 py-2 bg-white border border-gray-300 rounded-md text-sm font-semibold hover:bg-gray-50 transition-colors"
+            className="px-5 py-2.5 md:py-2 bg-white border border-gray-300 rounded-md text-sm font-semibold hover:bg-gray-50 transition-colors"
           >
             Сохранить
           </button>
         </div>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6">
         <h3 className="text-base font-semibold pb-3 mb-4 border-b border-gray-200">
           Настройки отправки претензий
         </h3>

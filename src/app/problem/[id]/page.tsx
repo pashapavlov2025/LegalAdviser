@@ -74,18 +74,18 @@ export default function ProblemPage() {
 
   return (
     <>
-      <h2 className="text-2xl font-bold">Проблема {problem.id}</h2>
-      <p className="text-sm mb-6">
+      <h2 className="text-xl md:text-2xl font-bold">Проблема {problem.id}</h2>
+      <p className="text-sm mb-4 md:mb-6">
         <Link href="/" className="text-gray-500 hover:text-gray-700">
           &larr; Назад к списку
         </Link>
       </p>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-5">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 mb-4 md:mb-5">
         <h3 className="text-base font-semibold pb-3 mb-4 border-b border-gray-200">
           Информация о проблеме
         </h3>
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
           <dt className="text-gray-500 text-xs uppercase tracking-wide">Контрагент</dt>
           <dd className="font-medium">{problem.counterparty.name} (ИНН {problem.counterparty.inn})</dd>
 
@@ -112,11 +112,11 @@ export default function ProblemPage() {
           </dd>
 
           <dt className="text-gray-500 text-xs uppercase tracking-wide">Email контрагента</dt>
-          <dd className="font-medium">{problem.counterparty.contactEmail}</dd>
+          <dd className="font-medium break-all">{problem.counterparty.contactEmail}</dd>
         </dl>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-5">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 mb-4 md:mb-5">
         <h3 className="text-base font-semibold pb-3 mb-4 border-b border-gray-200">
           Описание
         </h3>
@@ -124,7 +124,7 @@ export default function ProblemPage() {
       </div>
 
       {claim ? (
-        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-5">
+        <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 mb-4 md:mb-5">
           <h3 className="text-base font-semibold pb-3 mb-4 border-b border-gray-200">
             Сформированная претензия
             {claim.sent && (
@@ -133,10 +133,10 @@ export default function ProblemPage() {
               </span>
             )}
           </h3>
-          <div className="claim-text bg-amber-50 border border-yellow-300 rounded-md p-5 text-[13px] max-h-[500px] overflow-y-auto">
+          <div className="claim-text bg-amber-50 border border-yellow-300 rounded-md p-3 md:p-5 text-xs md:text-[13px] max-h-[400px] md:max-h-[500px] overflow-y-auto">
             {claim.text}
           </div>
-          <div className="mt-5">
+          <div className="mt-4 md:mt-5">
             {claim.sent ? (
               <span className="text-green-600 font-semibold text-sm">
                 Претензия отправлена на {claim.recipient}
@@ -144,7 +144,7 @@ export default function ProblemPage() {
             ) : (
               <button
                 onClick={handleSend}
-                className="px-5 py-2 bg-green-600 text-white rounded-md text-sm font-semibold hover:bg-green-700 transition-colors"
+                className="w-full md:w-auto px-5 py-2.5 md:py-2 bg-green-600 text-white rounded-md text-sm font-semibold hover:bg-green-700 transition-colors"
               >
                 Отправить на {claim.recipient}
               </button>
@@ -152,10 +152,10 @@ export default function ProblemPage() {
           </div>
         </div>
       ) : (
-        <div className="mt-5">
+        <div className="mt-4 md:mt-5">
           <button
             onClick={handleGenerate}
-            className="px-5 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
+            className="w-full md:w-auto px-5 py-2.5 md:py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
           >
             Сформировать претензию
           </button>
