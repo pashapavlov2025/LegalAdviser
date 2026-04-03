@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% set active = "dashboard" %}
+{% block title %}{{ problem.id }}{% endblock %}
+
+{% block content %}
+<h2>Проблема {{ problem.id }}</h2>
+<p class="subtitle">
+    <a href="/" style="color: inherit; text-decoration: none;">&larr; Назад к списку</a>
+</p>
+
+<div class="card">
+    <h3>Информация о проблеме</h3>
+    <dl class="detail-grid">
+        <dt>Контрагент</dt>
+        <dd>{{ problem.counterparty.name }} (ИНН {{ problem.counterparty.inn }})</dd>
+
+        <dt>Адрес</dt>
+        <dd>{{ problem.counterparty.address }}</dd>
+
+        <dt>Тип проблемы</dt>
+        <dd>{{ type_labels[problem.problem_type] }}</dd>
+
+        <dt>Дата выявления</dt>
+        <dd>{{ problem.date.strftime("%d.%m.%Y") }}</dd>
+
+        <dt>Договор</dt>
+        <dd>№ {{ problem.contract_number }} от {{ problem.contract_date.strftime("%d.%m.%Y") }}</dd>
+
+        <dt>Сумма</dt>
+        <dd>{% if problem.amount %}<span class="amount">{{ "{:,.0f}".format(problem.amount).replace(",", " ") }} &#8381;</span>{% else %}&mdash;{% endif %}</dd>
+
+        <dt>Статус</dt>
+        <dd><span class="badge badge-{{ problem.status.value }}">{{ status_labels[problem.status] }}</span></dd>
+
+        <dt>Email контрагента</dt>
+        <dd>{{ problem.counterparty.contact_email }}</dd>
+    </dl>
+</div>
+
+<div class="card">
+    <h3>Описание</h3>
+    <p>{{ problem.description }}</p>
+</div>
+
+{% if claim %}
+<div class="card">
+    <h3>Сформированная претензия {% if claim.sent %}<span class="badge badge-sent">Отправлена</span>{% endif %}</h3>
+    <div class="claim-text">{{ claim.text }}</div>
+    <div class="actions">
+        {% if not claim.sent %}
+        <form method="post" action="/problem/{{ problem.id }}/send-claim">
+            <button type="submit" class="btn btn-success">Отправить на {{ claim.recipient }}</button>
+        </form>
+        {% else %}
+        <span style="color: var(--success); font-weight: 600;">Претензия отправлена на {{ claim.recipient }}</span>
+        {% endif %}
+    </div>
+</div>
+{% else %}
+<div class="actions">
+    <form method="post" action="/problem/{{ problem.id }}/generate-claim">
+        <button type="submit" class="btn btn-primary">Сформировать претензию</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
